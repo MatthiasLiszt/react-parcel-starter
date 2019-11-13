@@ -1,18 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App.jsx"
+
 import styled from "styled-components";
-
-const StyledText = styled.p`
-  color: darkgoldenrod;
-  text-decoration: underline;
-`
-
-const App = () => (
-  <div>
-    <h1>React parcel starter</h1>
-    <StyledText>This text is styled with styled components :)</StyledText>
-  </div>
-);
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

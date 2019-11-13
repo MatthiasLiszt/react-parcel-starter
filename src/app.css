@@ -1,0 +1,62 @@
+.mainline{
+ background-color: lightgrey;
+ color: white;
+ position: fixed;
+ top: 0em;
+ left: 0em;
+ width: 100vw;   
+ font-family: sans-serif;
+ padding-left: 3em;
+ padding-top: 1em;
+ padding-bottom: 1em;
+}
+
+.centered{
+ margin: 0 auto;
+ margin-top: 6em;
+ width: 33%;
+ font-family: sans-serif;  
+}
+
+.centered div{
+ display: inline-block;   
+}
+
+.borderless{
+ border: none;   
+}
+
+.box{
+ border: 1px solid black;
+ height: 1em;
+ width: 1.5em;
+ font-size: 3em;
+ font-weight: bold;
+ margin-right: 1em;   
+}
+
+.finalButton{
+ width: 12em;
+ text-align: center;    
+ border: none;
+ padding-top: 0.5em;
+ padding-bottom: 0.5em;
+ font-weight: bold;
+}
+
+#logo{
+ width: 1em;   
+ height: 1em;
+ display: inline-block;
+ background-image: url('img/cup_fill_3.png');    
+ background-size: cover;
+ /*background-color: grey;*/
+}
+
+.white{
+ background-color: white;
+ border: 2px solid black;   
+ height: 1em;
+ width: 1em;
+}
+
