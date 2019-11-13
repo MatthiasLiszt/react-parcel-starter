@@ -19,7 +19,7 @@ class Settings extends React.Component{
  settingsDone(){
   localStorage.setItem("coffeecups", this.state.cups);
   this.setState({cups: this.state.cups, alreadyShown: true});
-  this.props.onSettingsSet();
+  this.props.onSettingsSet(this.state.cups);
  }
 
  render(){

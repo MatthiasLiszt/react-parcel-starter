@@ -2,10 +2,11 @@ import React from "react";
 import Settings from "./Settings.jsx"
 import Description from "./Description.jsx"
 import Game from "./Game.jsx"
+import Cup from './Cup.jsx'
 
 //<div className="mainline"><span>Coffee Game</span><div id="logo"/></div>
 
-const gameState={settingsShown: false,showDescription: true,startGame: false};
+const gameState={settingsShown: false,showDescription: true,startGame: false,cups: 1};
 
 class App extends React.Component {
     constructor(props){
@@ -14,8 +15,9 @@ class App extends React.Component {
      this.startGame=false;
     }
 
-    onSettingsSet() {
+    onSettingsSet(cups) {
      gameState.settingsShown=true;
+     gameState.cups=cups;
      console.log(JSON.stringify(gameState));     
     };
 
@@ -33,17 +35,21 @@ class App extends React.Component {
     }
 
     render() {
-     //localStorage.setItem("noCoffeeTranscription", false);
-     setInterval( ()=>{this.startGame=this.checkForGameStart();
-                       this.forceUpdate();
-                      },2000 ); 
+      //localStorage.setItem("noCoffeeTranscription", false);
+      const checkUntilGameStart = () => {this.startGame=this.checkForGameStart();
+                                        this.forceUpdate();
+                                        if(!this.startGame){
+                                         //setTimeout(checkUntilGameStart(),1500); 
+                                        }
+                                       };
+      setTimeout( ()=>checkUntilGameStart(),1500 ); 
       return (<div>
                     <div className="mainline">
                       <span>Coffee Game</span><div id="logo"></div>
                     </div>  
                     <div><Settings onSettingsSet={this.onSettingsSet} /></div>
                     <div><Description onSkipDescription={this.onSkipDescription} show={gameState.settingsShown}/></div>
-                    <div><Game show={startGame}/></div>
+                    <div><Game show={this.startGame} settings={gameState.cups}/></div>
                    </div>
                    );     
     }
