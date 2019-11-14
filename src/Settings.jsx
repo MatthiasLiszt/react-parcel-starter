@@ -24,7 +24,7 @@ class Settings extends React.Component{
 
  render(){
   const cups=this.state.cups;
-  if(!this.state.alreadyShown)
+  if(!this.props.shown)
    {return (<div className="centered">
             <h6>Number of cups:</h6>
             <div className="box" id="cups">{this.state.cups}</div>

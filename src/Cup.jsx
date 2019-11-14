@@ -33,19 +33,22 @@ class Cup extends React.Component{
               //this.forceUpdate();
              } 
             if(this.props.gState=='running')
-             {setTimeout( ()=>{console.log('settimeout running');
-                           if(this.props.gState=='running')
-                            {if(this.fullness<5){this.fullness+=(0.6*this.speed);
-                                                 this.visual=Math.floor(this.fullness);
-                                                 console.log(this.fullness+' '+this.visual);
-                                                 //setTimeout(this.gameFlow,200);
-                                                }   
-                             if(this.fullness>=5){this.visual=5;
-                                                  this.forceUpdate();
-                                                  this.gameOver();
-                                                 }
-                            }
-                          },200);  
+             {let tid=setTimeout( ()=>{console.log('settimeout running');
+                                       if(this.props.gState=='running')
+                                        {if(this.fullness<5){this.fullness+=(0.6*this.speed);
+                                                             this.visual=Math.floor(this.fullness);
+                                                             console.log(this.fullness+' '+this.visual);
+                                                             //setTimeout(this.gameFlow,200);
+                                                            }   
+                                         if(this.fullness>=5){this.visual=5;
+                                                              this.forceUpdate();
+                                                              if(this.fullness!=11)
+                                                               {this.gameOver();}
+                                                                this.fullness=11; 
+                                                               }
+                                         }
+                                       },200);  
+              this.props.pTId(tid);                         
              }            
            }
  render(){
