@@ -1,6 +1,8 @@
-# react-parcel-starter
+# react-parcel-starter and coffee drinking game 
 
 A React parcel starter project
+
+This repo implements a "coffee drinking game". You can click on the coffee cups to empty them and the coffee cups fill faster with time. 
 
 ## What's included
 
@@ -10,6 +12,9 @@ A React parcel starter project
 - styled-components
 
 ## Usage
+
+Clone the repo and and do as being told in the **builiding section**. Afterwards the program or game should run on 
+*localhost:1234* . Have fun with it! 
 
 ### Building
 
