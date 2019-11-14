@@ -6,13 +6,19 @@ import Cup from './Cup.jsx'
 
 //<div className="mainline"><span>Coffee Game</span><div id="logo"/></div>
 
-const gameState={settingsShown: false,showDescription: true,startGame: false,cups: 1};
+const gameState={settingsShown: false,showDescription: true,startGame: false,cups: 1,game: 'setup'};
+const GetGameState=()=>{return gameState.game}; 
+const SetGameState=(x)=>{gameState.game=x;}; 
+const gameReset=()=>{console.log('GAME RESET');
+                     gameState.settingsShown=false;
+                     gameState.startGame=false;
+                     gameState.game='setup';
+                    };
 
 class App extends React.Component {
     constructor(props){
      super(props); 
-     this.state=false;
-     this.startGame=false;
+     this.state=false;     
     }
 
     onSettingsSet(cups) {
@@ -26,7 +32,11 @@ class App extends React.Component {
     }
 
     getGameState(){
-     return gameState; 
+     return gameState.game; 
+    }
+
+    setGameState(value){
+     gameState.game=value; 
     }
 
     checkForGameStart(){
@@ -36,11 +46,8 @@ class App extends React.Component {
 
     render() {
       //localStorage.setItem("noCoffeeTranscription", false);
-      const checkUntilGameStart = () => {this.startGame=this.checkForGameStart();
-                                        this.forceUpdate();
-                                        if(!this.startGame){
-                                         //setTimeout(checkUntilGameStart(),1500); 
-                                        }
+      const checkUntilGameStart = () => {gameState.startGame=this.checkForGameStart();
+                                        this.forceUpdate();                                        
                                        };
       setTimeout( ()=>checkUntilGameStart(),1500 ); 
       return (<div>
@@ -49,7 +56,7 @@ class App extends React.Component {
                     </div>  
                     <div><Settings onSettingsSet={this.onSettingsSet} /></div>
                     <div><Description onSkipDescription={this.onSkipDescription} show={gameState.settingsShown}/></div>
-                    <div><Game show={this.startGame} settings={gameState.cups}/></div>
+                    <div><Game show={gameState.startGame} settings={gameState.cups} setGameState={SetGameState} getGameState={GetGameState} reset={gameReset}/></div>
                    </div>
                    );     
     }

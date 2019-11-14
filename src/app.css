@@ -60,3 +60,95 @@
  width: 1em;
 }
 
+.blueTime{
+ padding-left: 33%;
+ color: blue;   
+}
+
+.full0{
+    width: 2em;   
+    height: 2em;
+    display: inline-block;
+    background-image: url('img/cup_empty.png');    
+    background-size: cover;
+  }
+
+.full1{
+   width: 2em;   
+   height: 2em;
+   display: inline-block;
+   background-image: url('img/cup_fill_1.png');    
+   background-size: cover;
+  }   
+
+.full2{
+    width: 2em;   
+    height: 2em;
+    display: inline-block;
+    background-image: url('img/cup_fill_2.png');    
+    background-size: cover;
+   }   
+
+.full3{
+    width: 2em;   
+    height: 2em;
+    display: inline-block;
+    background-image: url('img/cup_fill_3.png');    
+    background-size: cover;
+   } 
+
+ .full4{
+    width: 2em;   
+    height: 2em;
+    display: inline-block;
+    background-image: url('img/cup_full.png');    
+    background-size: cover;
+  } 
+
+.full5{
+    width: 2em;   
+    height: 2em;
+    display: inline-block;
+    background-image: url('img/cup_too_full.png');    
+    background-size: cover;
+   }  
+
+   .yellowMessage{
+    width: 12em;
+    color: #DAA419;
+    padding-left: 21%;
+   }
+
+   .redMessage{
+    width: 12em; 
+    color:  #DA1919;
+    padding-left: 21%;
+   }
+
+   .invisible{
+    height: 1px;
+    color: transparent; 
+    display: none;
+   }
+
+   .invisible button{
+    border: none;
+    background-color: transparent;
+   }
+
+   .extraButton{
+    width: 12em;
+    color: black;
+    background-color: lightgrey;
+    display: block;
+    text-align: center;    
+    border: none;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-weight: bold; 
+   } 
+
+   .cupcentered{
+    width: 12em;
+    margin: 0 auto;
+   }

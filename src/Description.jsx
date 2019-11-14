@@ -38,7 +38,7 @@ class Description extends React.Component{
             </div>);  
      }       
     else
-     {return <div>skipped</div>;}     
+     {return <div></div>;}     
    } 
 }
 
