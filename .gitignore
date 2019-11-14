@@ -17,9 +17,6 @@ logs
 # Dependencies
 node_modules
 
-# Distribution
-dist
-
 # Runtime data
 .cache
 pids
