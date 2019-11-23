@@ -5,12 +5,23 @@ class Game extends React.Component{
 
  constructor(props){
   super(props);   
+  this.interval=200;
   this.gameTime=0;
+  this.tid=0;
   this.state={gameState:'paused',nextGameState:'Resume'};
   this.gameMessage='Game Paused';
   this.gameMessageColor='yellowMessage';
   this.extraButton='finalButton';
   //valid gameStates are : running,  paused, lost,restart
+  this.setGameState= (value) => {
+   let newState=this.state;
+   if(this.state.gameState!=='lost')
+    {newState.gameState='lost';
+     newState.nextGameState='Retry';
+     this.setState(newState); 
+     clearTimeout(this.tid);
+    } 
+  }
  }   
 
  runOrPauseGame(){
@@ -24,55 +35,54 @@ class Game extends React.Component{
    } 
    if(this.state.gameState=='lost')
    {
-   }  
+   }     
+ }
+
+ gameFlow(){
+  this.tid=setTimeout( ()=>{console.log('gameState '+this.state.gameState);
+                           if(this.state.gameState==='running')
+                            {this.gameTime+=0.2;                
+                             this.gameMessageColor='yellowMessage'; 
+                             this.forceUpdate();
+                             
+                            } 
+                            if(this.state.gameState==='lost')
+                             {this.gameMessageColor='redMessage';
+                              this.gameMessage='GAME OVER';
+                              this.extraButton='invisible';
+                              this.interval*=10000;
+                              this.props.report('lost');
+                              //this.forceUpdate();
+                             }
+                          },this.interval);
+  //return clearTimeout(this.tid);                        
+ } 
+
+ componentWillUnmount(){
+  clearTimeout(this.tid);
+ }
+
+ componentDidUpdate(){
+  this.gameFlow(); 
  }
  
- render(){
-  let tid=setTimeout( ()=> {console.log('gameState '+this.props.getGameState());                    
-                    if(this.props.getGameState()=='setup')
-                     {this.setState({gameState: 'paused',nextGameState: 'Resume'});
-                      this.props.setGameState('paused');
-                     }
-                    if(this.props.getGameState()=='lost')
-                     {this.setState({gameState: 'lost',nextGameState: 'Retry'});
-                      this.gameMessageColor='redMessage';
-                      this.gameMessage='GAME OVER';
-                      this.extraButton='invisible';
-                      this.forceUpdate();
-                     }
-                       
-                    if((this.state.gameState=='running')&&(this.props.getGameState()!='lost'))
-                     {this.gameTime+=0.2;                
-                      this.gameMessageColor='yellowMessage';      
-                     }
-                   }, 200); 
+ render(){               
+  console.log('cups '+this.props.settings);
+  //<Cup report={this.props.setGameState} gState={this.state.gameState} index={1} cups={this.props.settings} ></Cup>
+  let mydata=[...Array(this.props.settings)];       
+  return(<div className="centered">
 
-  this.props.pTId(tid);                 
-  //console.log('cups '+this.props.settings);
-  if(this.props.show){   
-    return(<div className="centered">
-          <p className="cupcentered">
-            <center>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={1} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={2} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={3} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={4} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            </center>
-          </p>
-          <p className="cupcentered">
-            <center>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={5} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={6} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={7} cups={this.props.settings} pTId={this.props.pTId}></Cup>
-            <Cup report={this.props.setGameState} gState={this.state.gameState} index={8} cups={this.props.settings} pTId={this.props.pTId}></Cup>  
-            </center>
-          </p>  
+          <div className="cupcentered">
+            {mydata.map((x,i) => <Cup key={i+1} report={this.setGameState} time={this.gameTime}/>  )}
+          </div>
+             
+  
           <p className="blueTime">{this.gameTime.toFixed(2)}s</p>
           <p className={this.gameMessageColor}>{this.gameMessage}</p>
           <p><button onClick={()=>this.runOrPauseGame()} className={this.extraButton}>{this.state.nextGameState}</button></p>
          </div>);    
-   }
-  else{return(<div></div>)} 
+   
+  
  } 
 }
 

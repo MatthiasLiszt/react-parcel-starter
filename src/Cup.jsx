@@ -7,21 +7,20 @@ class Cup extends React.Component{
   this.fullness=0;
   this.speed=1;
   this.visual=0;
+  this.oldTime=this.props.time;  
  } 
 
  emptyCup(){
-   if(this.props.gState=='running')
-    {this.fullness=this.visual=0;
-     this.speed/=0.9;        
-     console.log('speed '+this.speed);
-    }
+   this.fullness=this.visual=0;
+   this.speed/=0.9;        
+   console.log('speed '+this.speed); 
  }
 
  gameOver(){
   console.log('game over');
   this.props.report('lost'); 
  }
-
+ /*
  gameFlow(){
             if(this.props.gState=='paused')
              {console.log('gameFlow paused'); }
@@ -51,19 +50,30 @@ class Cup extends React.Component{
               this.props.pTId(tid);                         
              }            
            }
- render(){
-  //console.log(this.props.index+' '+this.props.cups);   
-  if(this.props.index<=this.props.cups)   
-   {this.gameFlow();    
-    return(<div onClick={()=>this.emptyCup()}><span className={'full'+String(this.visual)}></span></div>);   
-    //return(<div onClick={()=>this.emptyCup()}><span className={'full'+String(this.visual)}></span>{this.fullness.toFixed(2)}</div>);   
+  */         
+ gameFlow(){
+  if(this.fullness<5) 
+   {this.fullness+=(0.3*this.speed);
+    this.visual=Math.floor(this.fullness);
+    console.log(this.fullness+' '+this.visual);
    }
-  else
-   {return(<div></div>);}  
+  else{this.gameOver();}     
  }
+
+ componentDidUpdate(){
+  this.gameFlow(); 
+ }
+
+ render(){  
+    return(<div onClick={()=>this.emptyCup()}>
+            <span className={'full'+String(this.visual)}></span>
+           </div>);  
+ }          
+  
+  
 }
 
-export default Cup
+export default Cup;
 
 
 

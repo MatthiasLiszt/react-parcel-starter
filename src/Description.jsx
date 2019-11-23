@@ -11,10 +11,8 @@ class Description extends React.Component{
 
    shouldBeSkipped(){
     const check=localStorage.getItem("noCoffeeTranscription");   
-    if(check=='true')
-     {return true;}
-    else
-     {return false;} 
+    return (check=='true');
+     
    }
 
    noDescription(){
@@ -31,7 +29,7 @@ class Description extends React.Component{
    }
 
    render(){
-    if(this.props.show&&!this.state.skip)    
+    if(!this.state.skip)    
      {return (<div className="centered"><p>{this.description}</p>
                  <p><button className="white" onClick={()=>this.noDescription()}>{this.state.skipcheck}</button> {this.skipMsg}</p>
                  <p><button className="finalButton" onClick={()=>this.skipDescription()}>Start</button></p>
